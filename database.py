@@ -3,8 +3,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 DATABASE_URL = "sqlite:///./expenses.db"
-engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
-SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
+engine = create_engine(DATABASE_URL)
+SessionLocal = sessionmaker(bind=engine)
 Base = declarative_base()
 
 class Expense(Base):
@@ -14,7 +14,7 @@ class Expense(Base):
     amount = Column(Float)
     category = Column(String)
     description = Column(String)
-    payment_method = Column(String)
-    location = Column(String, nullable=True)
 
 Base.metadata.create_all(bind=engine)
+
+
